@@ -1,7 +1,6 @@
 var xhttp = new XMLHttpRequest();
 
 var data = [];
-var json = {};
 var cursor = null;
 var self = this;
 
@@ -28,7 +27,7 @@ function requestData(cursor){
     
     //Send the proper header information along with the request
     http.setRequestHeader('Content-type', 'application/JSON');
-    http.setRequestHeader('Authorization', 'bearer c412b3b9643c731774b679b0e3f51016e7e34d43');
+    http.setRequestHeader('Authorization', 'bearer 82c610f7d755ff854ef44f958a61e313e2fdb5fe');
     
     http.onreadystatechange = function() {//Call a function when the state changes.
         if(http.readyState == 4 && http.status == 200) {
@@ -47,6 +46,8 @@ function json2array(json){
     var result = [];
     var keys = Object.keys(json);
     keys.forEach(function(key){
+        json[key].node.createdAt = formatDate(json[key].node.createdAt);
+        json[key].node.updatedAt = formatDate(json[key].node.updatedAt);
         result.push(json[key]);
     });
     return result;
@@ -63,4 +64,11 @@ function download(filename, text) {
     element.click();
 
     document.body.removeChild(element);
+}
+
+function formatDate(date){
+    let year = date.substr(0,4);
+    let month = date.substr(5, 2);
+    let day = date.substr(8, 2);
+    return `${day}/${month}/${year}`
 }
