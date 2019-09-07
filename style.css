@@ -1,0 +1,14 @@
+.box{
+    text-align:center;
+}
+
+.title{
+    background-color: black;
+    color: white;
+    
+}
+
+.subtitle{
+    background-color : white;
+    color : black;
+}
